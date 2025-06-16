@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>四格漫畫腳本與語音</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>四格漫畫腳本與語音</h1>
+    <div>
+        <label>選擇批次：</label>
+        <select onchange="location.href='/batch/' + this.value;">
+            {% for batch in batches %}
+                <option value="{{ batch }}" {% if batch == current_batch %}selected{% endif %}>{{ batch }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <hr>
+    {% if scripts %}
+        {% for script in scripts %}
+            <div class="comic-block">
+                <h2>{{ script.topic }}</h2>
+                <pre>{{ script.text }}</pre>
+                <audio controls>
+                    <source src="{{ url_for('download_file', batch=current_batch, filename=script.mp3) }}" type="audio/mpeg">
+                    您的瀏覽器不支援音訊播放。
+                </audio>
+                <a href="{{ url_for('download_file', batch=current_batch, filename=script.mp3) }}" download>下載音檔</a>
+            </div>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <p>目前沒有可顯示的漫畫腳本，請先執行 main.py 產生資料。</p>
+    {% endif %}
+</body>
+</html>

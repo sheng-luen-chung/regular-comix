@@ -3,7 +3,7 @@ import os
 
 app = Flask(__name__)
 
-OUTPUTS_DIR = os.path.join(os.path.dirname(__file__), '..', 'outputs')
+OUTPUTS_DIR = os.path.join(os.path.dirname(__file__), '..', 'docs', 'outputs')
 
 def get_batches():
     """取得所有批次資料夾（依時間排序）"""

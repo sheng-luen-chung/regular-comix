@@ -1,6 +1,10 @@
 # Regular Comix
 
-自動從 Google News 擷取新聞主題，產生四格漫畫腳本並以語音播報。使用 GitHub Actions 每小時自動執行。
+自動從 Google News 擷取新聞主題，產生四格漫畫腳本並以語音播報。使用 GitHub Actions 每小時自動執行，並部署到 GitHub Pages。
+
+## 🌐 線上預覽
+
+**[🎭 訪問 Regular Comix 網站](https://YOUR_USERNAME.github.io/regular-comix/)**
 
 ## 功能特色
 
@@ -9,6 +13,21 @@
 - 🔊 將腳本轉換為中文語音檔案
 - ⏰ 每小時自動執行（透過 GitHub Actions）
 - 📁 自動保存結果到 `outputs/` 目錄
+- 🚀 自動部署到 GitHub Pages
+- 📱 響應式網頁設計，支援手機和桌面
+
+## 快速開始
+
+### 🚀 部署到 GitHub Pages
+
+1. **Fork 或複製此 repository**
+2. **設定 API 金鑰**: 在 Repository Settings > Secrets 中新增 `GOOGLE_API_KEY`
+3. **啟用 GitHub Pages**: 在 Settings > Pages 中選擇 "GitHub Actions"
+4. **等待自動部署**: GitHub Actions 會自動生成內容並部署
+
+詳細部署指南請參考 [DEPLOY.md](DEPLOY.md)
+
+### 🛠️ 本地開發
 
 ## 設定指南
 
@@ -60,14 +79,23 @@ python main.py
 
 ```
 regular-comix/
-├── .github/workflows/auto-update.yml  # GitHub Actions 工作流程
-├── main.py                           # 主程式
-├── requirements.txt                   # Python 依賴
-├── outputs/                          # 生成的檔案
-│   └── YYYYMMDD_HHMM/               # 按時間戳分組
-│       ├── *.txt                    # 漫畫腳本
-│       └── *.mp3                    # 語音檔案
-└── web/                             # Web 介面（可選）
+├── .github/workflows/
+│   └── deploy.yml               # GitHub Actions 自動部署工作流程
+├── docs/                        # GitHub Pages 靜態網站檔案
+│   ├── index.html              # 網站主頁
+│   ├── style.css               # 網站樣式
+│   ├── script.js               # 網站功能
+│   └── outputs/                # 生成的檔案（GitHub Pages 可直接存取）
+│       └── YYYYMMDD_HHMM/      # 按時間戳分組
+│           ├── *.txt           # 漫畫腳本
+│           └── *.mp3           # 語音檔案
+├── main.py                      # 主程式
+├── requirements.txt             # Python 依賴
+├── DEPLOY.md                    # 部署指南
+└── web/                        # 本地開發用 Flask 應用
+    ├── app.py                  # Flask 後端
+    ├── templates/
+    └── static/
 ```
 
 ## 技術棧
@@ -76,4 +104,33 @@ regular-comix/
 - **Google Generative AI (Gemini)** - 生成漫畫腳本
 - **Google Text-to-Speech (gTTS)** - 語音合成
 - **Beautiful Soup** - RSS 解析
-- **GitHub Actions** - 自動化執行
+- **GitHub Actions** - 自動化執行和部署
+- **GitHub Pages** - 靜態網站託管
+- **HTML/CSS/JavaScript** - 前端網頁介面
+
+## 🎯 使用說明
+
+### 線上使用
+
+1. 訪問 [GitHub Pages 網站](https://YOUR_USERNAME.github.io/regular-comix/)
+2. 選擇想要查看的生成批次
+3. 閱讀漫畫腳本
+4. 播放或下載語音檔案
+
+### 本地開發
+
+參考上方的「本地開發」章節設定。
+
+## 📈 監控和維護
+
+- **執行狀態**: 查看 GitHub Actions 頁面
+- **網站流量**: 查看 GitHub Insights
+- **API 使用量**: 監控 Google AI API 額度
+
+## 🤝 貢獻
+
+歡迎提交 Pull Request 或建立 Issue 來改善這個項目！
+
+## 📄 授權
+
+MIT License - 詳見 [LICENSE](LICENSE) 檔案

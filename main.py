@@ -17,7 +17,7 @@ if not GOOGLE_API_KEY:
 
 genai.configure(api_key=GOOGLE_API_KEY)
 
-OUTPUT_DIR = 'outputs'
+OUTPUT_DIR = 'docs/outputs'
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def get_top_news(num_topics=5, max_retries=3):

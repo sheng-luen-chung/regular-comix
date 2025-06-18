@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regular Comix - 四格漫畫腳本產生器</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎭 Regular Comix</h1>
+            <p class="subtitle">AI 自動生成四格漫畫腳本與語音</p>
+            <div class="github-link">
+                <a href="https://github.com/YOUR_USERNAME/regular-comix" target="_blank">
+                    📂 查看原始碼
+                </a>
+            </div>
+        </header>
+
+        <div class="project-info">
+            <div class="info-card">
+                <h2>📖 專案介紹</h2>
+                <p>這是一個自動從 Google News 擷取新聞主題，使用 AI 生成四格漫畫腳本並轉換為語音的項目。</p>
+                
+                <h3>✨ 主要功能</h3>
+                <ul>
+                    <li>📰 自動從 Google News RSS 擷取熱門新聞</li>
+                    <li>🎭 使用 Google Gemini AI 生成幽默的四格漫畫腳本</li>
+                    <li>🔊 將腳本轉換為中文語音檔案</li>
+                    <li>⏰ 每小時自動執行（透過 GitHub Actions）</li>
+                    <li>📁 自動保存結果到輸出目錄</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="batch-selector">
+            <label for="batch-select">📅 選擇生成批次：</label>
+            <select id="batch-select">
+                <option value="">-- 載入中... --</option>
+            </select>
+            <span id="batch-info" class="batch-info"></span>
+        </div>
+
+        <div id="scripts-container" class="scripts-container">
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>正在載入漫畫腳本...</p>
+            </div>
+        </div>
+
+        <div id="empty-state" class="empty-state" style="display: none;">
+            <div class="empty-icon">📝</div>
+            <h2>尚無漫畫腳本</h2>
+            <p>系統正在自動生成新的漫畫腳本，請稍後再次檢查</p>
+        </div>
+
+        <div class="tech-stack">
+            <h2>🛠️ 技術棧</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <strong>Python 3.11+</strong>
+                    <span>主要程式語言</span>
+                </div>
+                <div class="tech-item">
+                    <strong>Google Gemini AI</strong>
+                    <span>生成漫畫腳本</span>
+                </div>
+                <div class="tech-item">
+                    <strong>Google TTS</strong>
+                    <span>語音合成</span>
+                </div>
+                <div class="tech-item">
+                    <strong>GitHub Actions</strong>
+                    <span>自動化執行</span>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>🤖 由 Google Gemini AI 自動生成內容 | 🚀 部署在 GitHub Pages</p>
+            <p>
+                <a href="https://github.com/YOUR_USERNAME/regular-comix/actions" target="_blank">
+                    查看自動化執行狀態
+                </a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

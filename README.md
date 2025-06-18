@@ -190,7 +190,13 @@ python main.py
    - 前往 `Settings > Secrets and variables > Actions`
    - 新增 `GOOGLE_API_KEY` (必要)
 
-3. **自動部署**
+3. **GitHub Actions 權限設定**
+   - 前往 `Settings > Actions > General`
+   - 在 "Workflow permissions" 區域
+   - 選擇 "Read and write permissions"
+   - 勾選 "Allow GitHub Actions to create and approve pull requests"
+
+4. **自動部署**
    - 每次 GitHub Actions 執行完成後
    - GitHub Pages 會自動重新部署
    - 通常在 2-5 分鐘內完成

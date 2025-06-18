@@ -80,7 +80,7 @@ python main.py
 ```
 regular-comix/
 ├── .github/workflows/
-│   └── deploy.yml               # GitHub Actions 自動部署工作流程
+│   └── regular-comix.yml        # GitHub Actions 自動執行工作流程
 ├── docs/                        # GitHub Pages 靜態網站檔案
 │   ├── index.html              # 網站主頁
 │   ├── style.css               # 網站樣式

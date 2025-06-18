@@ -17,14 +17,38 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Run comic generator
+          pip install -r requirements.txt      - name: Run comic generator
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         run: |
+          echo "🎭 開始生成漫畫腳本..."
           python main.py
+          echo "✅ 漫畫腳本生成完成"
+          
+          # 生成檔案清單
+          echo "📋 生成檔案清單..."
+          python generate_file_list.py
+          echo "✅ 檔案清單生成完成"
+          
       - name: Upload outputs
         uses: actions/upload-artifact@v4
         with:
           name: comic-outputs
-          path: outputs/
+          path: docs/outputs/
+          
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # 添加所有變更的檔案
+          git add docs/
+          
+          # 檢查是否有變更需要提交
+          if git diff --staged --quiet; then
+            echo "📝 沒有新的變更需要提交"
+          else
+            git commit -m "🤖 自動生成新的漫畫腳本 $(date '+%Y-%m-%d %H:%M:%S UTC')"
+            git push
+            echo "✅ 變更已提交並推送"
+          fi

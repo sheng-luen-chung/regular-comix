@@ -43,8 +43,7 @@ jobs:
       run: |
         echo "🎭 開始生成漫畫腳本..."
         python main.py
-        echo "✅ 漫畫腳本生成完成"
-      - name: Update GitHub Pages content
+        echo "✅ 漫畫腳本生成完成"    - name: Update GitHub Pages content
       run: |
         echo "📝 更新 GitHub Pages 內容..."
         
@@ -53,6 +52,10 @@ jobs:
         
         # 確保 docs/outputs 目錄存在
         mkdir -p docs/outputs
+        
+        # 生成檔案清單
+        echo "📋 生成檔案清單..."
+        python generate_file_list.py
         
         # 更新 JavaScript 中的 GitHub 用戶名
         REPO_OWNER="${{ github.repository_owner }}"

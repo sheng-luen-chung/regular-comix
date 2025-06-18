@@ -1,0 +1,294 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 400;
+}
+
+/* Batch selector */
+.batch-selector {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.batch-selector label {
+    font-weight: 500;
+    color: #555;
+}
+
+#batch-select {
+    padding: 10px 15px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+    min-width: 200px;
+    transition: border-color 0.3s ease;
+}
+
+#batch-select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.batch-info {
+    color: #666;
+    font-size: 0.9rem;
+    background: #f8f9fa;
+    padding: 5px 12px;
+    border-radius: 20px;
+}
+
+/* Scripts container */
+.scripts-container {
+    display: grid;
+    gap: 25px;
+}
+
+/* Comic cards */
+.comic-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.comic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+}
+
+.comic-header {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.comic-title {
+    font-size: 1.3rem;
+    font-weight: 500;
+    flex: 1;
+    margin-right: 15px;
+}
+
+.comic-index {
+    background: rgba(255,255,255,0.2);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.comic-content {
+    padding: 25px;
+}
+
+/* Script text */
+.script-text h3,
+.audio-section h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.script-pre {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid #4facfe;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: #444;
+    margin-bottom: 25px;
+}
+
+/* Audio section */
+.audio-section {
+    border-top: 1px solid #e9ecef;
+    padding-top: 20px;
+}
+
+audio {
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+.download-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.script-btn {
+    background: #28a745;
+    color: white;
+}
+
+.script-btn:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+.audio-btn {
+    background: #17a2b8;
+    color: white;
+}
+
+.audio-btn:hover {
+    background: #138496;
+    transform: translateY(-2px);
+}
+
+/* Empty state */
+.empty-state {
+    background: white;
+    border-radius: 15px;
+    padding: 60px 40px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.empty-state h2 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.empty-state p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.empty-actions {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.empty-actions code {
+    background: #e9ecef;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    color: #495057;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    color: rgba(255,255,255,0.8);
+    font-size: 0.9rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .batch-selector {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    #batch-select {
+        width: 100%;
+    }
+    
+    .comic-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .comic-title {
+        margin-right: 0;
+    }
+    
+    .download-links {
+        flex-direction: column;
+    }
+    
+    .download-btn {
+        text-align: center;
+        justify-content: center;
+    }
+}

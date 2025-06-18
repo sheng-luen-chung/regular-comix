@@ -1,4 +1,29 @@
+# Python
 __pycache__/
+*.py[cod]
+*$py.class
 *.pyc
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment variables
 .env
-outputs/
+
+# VS Code
+.vscode/
+
+# IDE
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 注意：我們需要追蹤 outputs/ 目錄中的檔案
+# outputs/ 行已被移除，讓生成的檔案可以被 git 追蹤

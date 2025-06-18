@@ -2,35 +2,86 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <title>四格漫畫腳本與語音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regular Comix - 四格漫畫腳本產生器</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>四格漫畫腳本與語音</h1>
-    <div>
-        <label>選擇批次：</label>
-        <select onchange="location.href='/batch/' + this.value;">
-            {% for batch in batches %}
-                <option value="{{ batch }}" {% if batch == current_batch %}selected{% endif %}>{{ batch }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <hr>
-    {% if scripts %}
-        {% for script in scripts %}
-            <div class="comic-block">
-                <h2>{{ script.topic }}</h2>
-                <pre>{{ script.text }}</pre>
-                <audio controls>
-                    <source src="{{ url_for('download_file', batch=current_batch, filename=script.mp3) }}" type="audio/mpeg">
-                    您的瀏覽器不支援音訊播放。
-                </audio>
-                <a href="{{ url_for('download_file', batch=current_batch, filename=script.mp3) }}" download>下載音檔</a>
+    <div class="container">
+        <header>
+            <h1>🎭 Regular Comix</h1>
+            <p class="subtitle">AI 自動生成四格漫畫腳本與語音</p>
+        </header>
+
+        <div class="batch-selector">
+            <label for="batch-select">📅 選擇生成批次：</label>
+            <select id="batch-select" onchange="location.href='/batch/' + this.value;">
+                <option value="">-- 選擇批次 --</option>
+                {% for batch in batches %}
+                    <option value="{{ batch }}" {% if batch == current_batch %}selected{% endif %}>
+                        {{ batch[:4] }}/{{ batch[4:6] }}/{{ batch[6:8] }} {{ batch[9:11] }}:{{ batch[11:13] }}
+                    </option>
+                {% endfor %}
+            </select>
+            {% if current_batch %}
+                <span class="batch-info">
+                    總共 {{ scripts|length }} 個漫畫腳本
+                </span>
+            {% endif %}
+        </div>
+
+        {% if scripts %}
+            <div class="scripts-container">
+                {% for script in scripts %}
+                    <div class="comic-card">
+                        <div class="comic-header">
+                            <h2 class="comic-title">{{ script.topic }}</h2>
+                            <span class="comic-index">#{{ loop.index }}</span>
+                        </div>
+                        
+                        <div class="comic-content">
+                            <div class="script-text">
+                                <h3>📝 漫畫腳本</h3>
+                                <pre class="script-pre">{{ script.text }}</pre>
+                            </div>
+                            
+                            <div class="audio-section">
+                                <h3>🔊 語音播放</h3>
+                                <audio controls preload="metadata">
+                                    <source src="{{ url_for('download_file', batch=current_batch, filename=script.mp3) }}" type="audio/mpeg">
+                                    您的瀏覽器不支援音訊播放。
+                                </audio>
+                                <div class="download-links">
+                                    <a href="{{ url_for('download_file', batch=current_batch, filename=script.txt) }}" 
+                                       class="download-btn script-btn" download>
+                                        📄 下載腳本
+                                    </a>
+                                    <a href="{{ url_for('download_file', batch=current_batch, filename=script.mp3) }}" 
+                                       class="download-btn audio-btn" download>
+                                        🎵 下載音檔
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-            <hr>
-        {% endfor %}
-    {% else %}
-        <p>目前沒有可顯示的漫畫腳本，請先執行 main.py 產生資料。</p>
-    {% endif %}
+        {% else %}
+            <div class="empty-state">
+                <div class="empty-icon">📝</div>
+                <h2>尚無漫畫腳本</h2>
+                <p>目前沒有可顯示的漫畫腳本</p>
+                <div class="empty-actions">
+                    <p>請執行以下命令來生成新的腳本：</p>
+                    <code>python main.py</code>
+                </div>
+            </div>
+        {% endif %}
+
+        <footer>
+            <p>🤖 由 Google Gemini AI 自動生成內容</p>
+        </footer>
+    </div>
 </body>
 </html>

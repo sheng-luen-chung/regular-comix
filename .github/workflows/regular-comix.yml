@@ -38,15 +38,12 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-      - name: Run comic generator
+    
+    - name: Run comic generator
       env:
         GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
       run: |
-        python main_clean.py
-    
-    - name: Update file list
-      run: |
-        python generate_file_list.py
+        python main.py
     
     - name: Check for changes
       id: verify-changed-files
@@ -61,7 +58,6 @@ jobs:
       if: steps.verify-changed-files.outputs.changed == 'true'
       run: |
         git add docs/outputs/
-        git add docs/file-list.json
         git commit -m "🤖 Auto-generated comics - $(date '+%Y-%m-%d %H:%M:%S UTC')"
         git push origin HEAD:${{ github.ref_name }}
     

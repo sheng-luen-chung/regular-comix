@@ -88,16 +88,23 @@ def download_file(batch, filename):
         return "檔案不存在", 404
 
 if __name__ == '__main__':
-    print("🚀 啟動 Regular Comix Web 介面...")
-    print(f"📁 輸出目錄: {OUTPUTS_DIR}")
+    import sys
+    import codecs
+    
+    # 設定 stdout 編碼為 UTF-8
+    if sys.platform.startswith('win'):
+        sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+    
+    print("🚀 Starting Regular Comix Web Interface...")
+    print(f"📁 Output Directory: {OUTPUTS_DIR}")
     
     # 檢查 outputs 目錄
     if not os.path.exists(OUTPUTS_DIR):
-        print("⚠️  警告: outputs 目錄不存在，請先執行 main.py 生成內容")
+        print("⚠️  Warning: outputs directory not found, please run main.py first")
     else:
         batches = get_batches()
-        print(f"📊 找到 {len(batches)} 個批次")
+        print(f"📊 Found {len(batches)} batches")
     
-    print("🌐 開啟瀏覽器前往: http://127.0.0.1:5000")
+    print("🌐 Open browser at: http://127.0.0.1:5000")
     app.run(debug=True, host='127.0.0.1', port=5000)
     

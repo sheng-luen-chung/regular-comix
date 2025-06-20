@@ -6,6 +6,11 @@ on:
     - cron: '0 * * * *'
   workflow_dispatch:  # 允許手動觸發
 
+# 給予 GitHub Actions 必要的權限
+permissions:
+  contents: write  # 允許寫入 repository 內容
+  actions: read    # 允許讀取 actions
+
 jobs:
   generate-comics:
     runs-on: ubuntu-latest
@@ -14,8 +19,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        # 需要 token 來推送生成的文件
+        # 使用 GITHUB_TOKEN 進行認證
         token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0  # 獲取完整的 git 歷史
     
     - name: Set up Python 3.11
       uses: actions/setup-python@v4
@@ -39,6 +45,10 @@ jobs:
       run: |
         python main.py
     
+    - name: Update file list
+      run: |
+        python generate_file_list.py
+    
     - name: Check for changes
       id: verify-changed-files
       run: |
@@ -52,8 +62,9 @@ jobs:
       if: steps.verify-changed-files.outputs.changed == 'true'
       run: |
         git add docs/outputs/
+        git add docs/file-list.json
         git commit -m "🤖 Auto-generated comics - $(date '+%Y-%m-%d %H:%M:%S UTC')"
-        git push
+        git push origin HEAD:${{ github.ref_name }}
     
     - name: Display generation summary
       run: |

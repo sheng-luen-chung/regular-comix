@@ -38,12 +38,11 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-    
-    - name: Run comic generator
+      - name: Run comic generator
       env:
         GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
       run: |
-        python main.py
+        python main_clean.py
     
     - name: Update file list
       run: |

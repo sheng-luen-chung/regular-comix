@@ -33,14 +33,23 @@ def get_scripts(batch):
                 topic = fname[:-4]  # 移除 .txt 副檔名
                 txt_path = os.path.join(batch_dir, fname)
                 mp3_path = os.path.join(batch_dir, topic + '.mp3')
-                
-                # 讀取腳本內容
+                  # 讀取腳本內容
                 try:
                     with open(txt_path, encoding='utf-8') as f:
-                        text = f.read()
+                        content = f.read()
+                    # 確保內容不為空且適合顯示
+                    text = content.strip() if content.strip() else "腳本內容讀取中..."
+                except UnicodeDecodeError:
+                    # 嘗試其他編碼
+                    try:
+                        with open(txt_path, encoding='big5') as f:
+                            content = f.read()
+                        text = content.strip() if content.strip() else "腳本內容讀取中..."
+                    except:
+                        text = "無法讀取腳本內容（編碼問題）"
                 except Exception as e:
                     print(f"Error reading {txt_path}: {e}")
-                    text = "無法讀取腳本內容"
+                    text = f"讀取錯誤：{str(e)}"
                 
                 # 檢查對應的 MP3 檔案是否存在
                 mp3_exists = os.path.exists(mp3_path)
@@ -90,21 +99,40 @@ def download_file(batch, filename):
 if __name__ == '__main__':
     import sys
     import codecs
+    import os
     
-    # 設定 stdout 編碼為 UTF-8
+    # 設定環境變數確保 UTF-8 輸出
+    os.environ['PYTHONIOENCODING'] = 'utf-8'
+    os.environ['PYTHONLEGACYWINDOWSSTDIO'] = 'utf-8'
+    
+    # 設定 stdout 編碼為 UTF-8（Windows 相容）
     if sys.platform.startswith('win'):
-        sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+        try:
+            # 嘗試設定 Windows 終端機為 UTF-8
+            os.system('chcp 65001 >nul 2>&1')
+            sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+            sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
+        except:
+            pass  # 如果失敗就使用預設編碼
     
-    print("🚀 Starting Regular Comix Web Interface...")
-    print(f"📁 Output Directory: {OUTPUTS_DIR}")
+    print("🚀 啟動 Regular Comix 網頁界面...")
+    print(f"📁 輸出目錄：{OUTPUTS_DIR}")
     
     # 檢查 outputs 目錄
     if not os.path.exists(OUTPUTS_DIR):
-        print("⚠️  Warning: outputs directory not found, please run main.py first")
+        print("⚠️  警告：找不到輸出目錄，請先執行 main.py 產生內容")
     else:
         batches = get_batches()
-        print(f"📊 Found {len(batches)} batches")
+        print(f"📊 發現 {len(batches)} 個批次")
+        if batches:
+            print(f"📅 最新批次：{batches[0]}")
     
-    print("🌐 Open browser at: http://127.0.0.1:5000")
-    app.run(debug=True, host='127.0.0.1', port=5000)
+    print("🌐 請在瀏覽器開啟：http://127.0.0.1:5000")
+    print("⛔ 按 Ctrl+C 停止伺服器")
+    print("=" * 50)
+    
+    try:
+        app.run(debug=True, host='127.0.0.1', port=5000)
+    except KeyboardInterrupt:
+        print("\n👋 伺服器已停止")
     

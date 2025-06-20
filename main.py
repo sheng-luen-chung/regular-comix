@@ -7,6 +7,12 @@ from dotenv import load_dotenv
 import google.generativeai as genai
 import sys
 
+# Fix Windows console encoding issues
+if sys.platform.startswith('win'):
+    import codecs
+    sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+    sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
+
 # Load environment variables
 load_dotenv()
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')

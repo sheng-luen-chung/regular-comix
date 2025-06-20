@@ -15,8 +15,27 @@
 - 📁 自動保存結果到 `outputs/` 目錄
 - 🚀 自動部署到 GitHub Pages
 - 📱 響應式網頁設計，支援手機和桌面
+- 🖥️ 本地 Web 界面，支援完美中文顯示
 
 ## 🚀 快速開始
+
+### 方法一：使用整合啟動器（推薦）
+
+```bash
+# 雙擊執行或在命令列執行
+launcher.bat          # Windows 批次檔
+launcher.ps1          # PowerShell 腳本
+python launcher.py    # Python 腳本
+```
+
+整合啟動器提供以下功能：
+- 🚀 生成新的漫畫腳本與語音
+- 🌐 啟動網頁界面查看結果
+- 📂 開啟結果資料夾
+- 📊 快速預覽最新結果
+- 🧹 清理舊檔案
+
+### 方法二：直接執行（傳統方式）
 
 ### 🌐 部署到 GitHub Pages（線上自動化）
 
@@ -292,6 +311,36 @@ regular-comix/
 
 歡迎提交 Pull Request 或建立 Issue 來改善這個項目！
 
-## 📄 授權
+## �️ 最新功能
+
+### 整合啟動器 (launcher.py)
+提供一個統一的中文界面來管理所有功能：
+- 🚀 生成新的漫畫腳本與語音
+- 🌐 啟動網頁界面查看結果  
+- 📂 開啟結果資料夾
+- 📊 快速預覽最新結果
+- 🧹 清理舊檔案
+
+**使用方法：**
+```bash
+launcher.bat          # Windows 批次檔
+launcher.ps1          # PowerShell 腳本（更好的中文支援）
+python launcher.py    # Python 腳本（跨平台）
+```
+
+### 中文顯示優化
+- ✅ PowerShell 腳本完全支援中文
+- ✅ 網頁界面使用 Noto Sans TC 字體
+- ✅ 終端機自動設定 UTF-8 編碼
+- ✅ 所有輸出內容正確顯示中文
+
+### Web 界面改進
+- 📱 響應式設計，支援行動裝置
+- 🎨 美觀的漸層背景與卡片設計
+- 🔊 內建音訊播放器
+- 📅 時間批次選擇器
+- 📄 直接下載腳本與音檔
+
+## �📄 授權
 
 MIT License - 詳見 [LICENSE](LICENSE) 檔案

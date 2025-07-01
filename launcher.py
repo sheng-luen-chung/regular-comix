@@ -75,17 +75,22 @@ def generate_content():
     """生成新內容"""
     print("\n🚀 開始生成新的漫畫腳本與語音...")
     print("這可能需要幾分鐘時間，請耐心等待...")
+    print("💡 程序正在後台運行，請不要關閉視窗...")
+    print("📊 您將看到詳細的執行進度...")
     print("="*50)
     
     try:
+        print("⏳ 正在執行 main.py...")
+        # 使用 capture_output=False 來顯示實時輸出
         result = subprocess.run([sys.executable, "main.py"], 
                               capture_output=False, text=True)
+        print("="*50)
         if result.returncode == 0:
-            print("\n✅ 生成完成！")
+            print("✅ 生成完成！")
         else:
-            print(f"\n❌ 生成失敗，返回代碼：{result.returncode}")
+            print(f"❌ 生成失敗，返回代碼：{result.returncode}")
     except Exception as e:
-        print(f"\n❌ 執行錯誤：{e}")
+        print(f"❌ 執行錯誤：{e}")
     
     input("\n按 Enter 繼續...")
 
@@ -215,7 +220,14 @@ def main():
             # 顯示選單
             show_menu()
             
-            choice = input("請選擇 (1-6): ").strip()
+            # 添加調試信息
+            print("DEBUG: 等待用戶輸入...")
+            sys.stdout.flush()  # 強制刷新輸出緩衝
+            
+            choice = input("請選擇 (1-6) 然後按 Enter: ").strip()
+            
+            # 添加調試信息
+            print(f"DEBUG: 用戶輸入了 '{choice}'")
             
             if choice == '1':
                 generate_content()
@@ -231,14 +243,16 @@ def main():
                 print("\n👋 再見！")
                 break
             else:
-                print("\n❌ 無效選擇，請重新選擇")
-                time.sleep(1)
+                print(f"\n❌ 無效選擇 '{choice}'，請重新選擇")
+                time.sleep(2)
                 
         except KeyboardInterrupt:
             print("\n\n👋 程式已中斷")
             break
         except Exception as e:
             print(f"\n❌ 發生錯誤：{e}")
+            import traceback
+            traceback.print_exc()
             input("按 Enter 繼續...")
 
 if __name__ == '__main__':

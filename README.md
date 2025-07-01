@@ -1,108 +1,129 @@
 # Regular Comix
 
-自動從 Google News 擷取新聞主題，產生四格漫畫腳本並以語音播報。使用 GitHub Actions 每小時自動執行，並部署到 GitHub Pages。
+🎭 自動從 Google News 擷取新聞主題，使用 AI 生成幽默的四格漫畫腳本，並轉換為中文語音播報。支援本地運行和自動化部署。
 
-## 🌐 線上預覽
+## ✨ 功能特色
 
-**[🎭 訪問 Regular Comix 網站](https://YOUR_USERNAME.github.io/regular-comix/)**
-
-## 功能特色
-
-- 📰 自動從 Google News RSS 擷取熱門新聞
-- 🎭 使用 Google Gemini AI 生成幽默的四格漫畫腳本
-- 🔊 將腳本轉換為中文語音檔案
-- ⏰ 每小時自動執行（透過 GitHub Actions）
-- 📁 自動保存結果到 `outputs/` 目錄
-- 🚀 自動部署到 GitHub Pages
-- 📱 響應式網頁設計，支援手機和桌面
-- 🖥️ 本地 Web 界面，支援完美中文顯示
+- 📰 **智能新聞擷取** - 從 Google News RSS 自動獲取熱門新聞
+- 🤖 **AI 創作腳本** - 使用 Google Gemini AI 生成幽默四格漫畫
+- 🔊 **語音播報** - 將腳本轉換為高質量中文語音
+- �️ **完整界面** - 提供友好的命令行和網頁界面
+- 📱 **響應式設計** - 支援桌面和移動設備
+- ⚙️ **一鍵啟動** - 多種啟動方式，操作簡單
+- 📁 **自動管理** - 智能文件組織和清理功能
 
 ## 🚀 快速開始
 
-### 方法一：使用整合啟動器（推薦）
+### ⭐ 推薦方式：一鍵啟動
 
 ```bash
-# 雙擊執行或在命令列執行
-launcher.bat          # Windows 批次檔
-launcher.ps1          # PowerShell 腳本
-python launcher.py    # Python 腳本
+# Windows 用戶（推薦）
+雙擊 launcher.bat
+
+# 或使用 PowerShell
+.\launcher.ps1
+
+# 或直接使用 Python
+python launcher.py
 ```
 
-整合啟動器提供以下功能：
-- 🚀 生成新的漫畫腳本與語音
-- 🌐 啟動網頁界面查看結果
-- 📂 開啟結果資料夾
-- 📊 快速預覽最新結果
-- 🧹 清理舊檔案
+### 📋 整合啟動器功能
 
-### 方法二：直接執行（傳統方式）
+啟動器提供完整的交互式選單：
 
-### 🌐 部署到 GitHub Pages（線上自動化）
+1. **🚀 生成新內容** - 自動抓取新聞並生成漫畫腳本
+2. **🌐 啟動網頁界面** - 在瀏覽器中查看所有結果
+3. **📂 開啟結果文件夾** - 快速訪問生成的文件
+4. **📊 預覽最新結果** - 查看最近生成的內容
+5. **🧹 清理舊文件** - 自動清理 30 天前的文件
 
-1. **Fork 或複製此 repository**
-2. **設定 API 金鑰**: 在 Repository Settings > Secrets 中新增 `GOOGLE_API_KEY`
-3. **啟用 GitHub Pages**: 在 Settings > Pages 中選擇 "Deploy from a branch" > `main` / `docs`
-4. **等待自動部署**: GitHub Actions 會每小時自動生成內容並部署
+### 🔧 系統要求
 
-詳細部署指南請參考 [DEPLOY.md](DEPLOY.md)
-
-### � 本地開發與測試
+- **Python 3.8+**
+- **Google AI API Key** (免費申請)
+- **網絡連接** (用於新聞擷取和 AI 服務)
 
 **快速上手（Windows 使用者）：**
 ```bash
 # 1. 克隆專案
 git clone <your-repo-url>
-cd regular-comix
+## 📦 安裝指南
 
-# 2. 安裝依賴
-pip install -r requirements.txt
+### 1. 克隆項目
 
-# 3. 設定 API 金鑰（複製 .env.example 為 .env 並填入金鑰）
-cp .env.example .env
-
-# 4. 選擇使用方式：
-
-# 方式A：生成內容並在靜態網站查看
-./update_content.bat        # 生成新內容 + 更新索引
-# 然後在 VS Code 中開啟 docs/index.html 使用 Live Server
-
-# 方式B：啟動本地開發伺服器
-./start_web.bat            # 啟動 Flask 伺服器，訪問 http://127.0.0.1:5000
-```
-
-## 設定指南
-
-### 1. 設定 Google AI API 金鑰
-
-1. 前往 [Google AI Studio](https://makersuite.google.com/app/apikey)
-2. 建立新的 API 金鑰
-3. 在 GitHub 專案的 Settings > Secrets and variables > Actions 中
-4. 新增 Repository secret：
-   - Name: `GOOGLE_API_KEY`
-   - Value: 你的 API 金鑰
-
-### 2. 啟用 GitHub Actions
-
-GitHub Actions 工作流程會自動：
-- 每小時執行一次
-- 生成新的漫畫腳本和語音檔案
-- 自動提交並推送到 repository
-
-### 3. 手動執行
-
-你也可以在 GitHub 的 Actions 頁面手動觸發工作流程。
-
-## 本地開發
-
-1. 克隆專案：
 ```bash
 git clone <your-repo-url>
 cd regular-comix
 ```
 
-2. 安裝依賴：
+### 2. 安裝依賴
+
 ```bash
 pip install -r requirements.txt
+```
+
+### 3. 設定 Google AI API 金鑰
+
+1. 前往 [Google AI Studio](https://makersuite.google.com/app/apikey) 免費申請 API 金鑰
+2. 複製 `.env.example` 為 `.env`：
+   ```bash
+   cp .env.example .env
+   ```
+3. 編輯 `.env` 文件，填入您的 API 金鑰：
+   ```
+   GOOGLE_API_KEY=your_api_key_here
+   ```
+
+### 4. 開始使用
+
+```bash
+# Windows 用戶 - 雙擊啟動
+launcher.bat
+
+# 或使用 Python 直接啟動
+python launcher.py
+```
+
+## 🎯 使用說明
+
+### 實時進度顯示
+
+程序運行時會顯示詳細的進度信息：
+
+```
+🚀 開始生成漫畫腳本 - 20250701_2005
+==================================================
+📰 正在從 Google News 獲取新聞...
+🌐 嘗試獲取新聞 (第 1/3 次)...
+📡 連接到 Google News RSS...
+✅ 網絡請求成功！
+📄 正在解析 RSS 內容...
+📰 找到 87 個新聞項目，正在篩選...
+✅ 成功篩選出 5 個優質新聞主題
+
+🎯 處理主題 1/5
+📢 主題：某某新聞標題
+------------------------------
+📝 正在為主題生成四格漫畫腳本...
+🤖 正在呼叫 Google Gemini AI... (第 1 次)
+✅ AI 腳本生成成功！
+💾 正在保存腳本和生成語音...
+🔊 正在生成中文語音（可能需要幾秒鐘）...
+✅ 語音已保存
+✅ 主題 1 處理完成！
+```
+
+### 輸出文件結構
+
+```
+docs/outputs/
+└── 20250701_2005/          # 時間戳文件夾
+    ├── 新聞標題1.txt        # 漫畫腳本
+    ├── 新聞標題1.mp3        # 語音文件
+    ├── 新聞標題2.txt
+    ├── 新聞標題2.mp3
+    └── ...
+```
 ```
 
 3. 設定環境變數：
@@ -296,51 +317,99 @@ regular-comix/
 2. 選擇想要查看的生成批次
 3. 閱讀漫畫腳本
 4. 播放或下載語音檔案
+## 🌐 自動化部署 (GitHub Pages)
 
-### 本地開發
+### 設置步驟
 
-參考上方的「本地開發」章節設定。
+1. **Fork 此項目**
+2. **設定 API 金鑰**：
+   - 前往 Repository Settings > Secrets and variables > Actions
+   - 新增 Repository secret：
+     - Name: `GOOGLE_API_KEY`
+     - Value: 您的 Google AI API 金鑰
 
-## 📈 監控和維護
+3. **啟用 GitHub Pages**：
+   - 前往 Settings > Pages
+   - Source 選擇 "Deploy from a branch"
+   - Branch 選擇 `main` / `docs`
+
+4. **等待自動部署**：
+   - GitHub Actions 會每小時自動執行
+   - 生成新的漫畫腳本和語音檔案
+   - 自動提交並推送到 repository
+
+### 監控和維護
 
 - **執行狀態**: 查看 GitHub Actions 頁面
-- **網站流量**: 查看 GitHub Insights
 - **API 使用量**: 監控 Google AI API 額度
+- **網站訪問**: `https://YOUR_USERNAME.github.io/regular-comix/`
 
-## 🤝 貢獻
+## 🔧 技術架構
 
-歡迎提交 Pull Request 或建立 Issue 來改善這個項目！
+### 核心組件
 
-## �️ 最新功能
+- **新聞擷取**: Google News RSS + BeautifulSoup
+- **AI 生成**: Google Gemini 2.0 Flash
+- **語音合成**: Google Text-to-Speech (gTTS)
+- **網頁界面**: Flask + 響應式設計
+- **自動化**: GitHub Actions
 
-### 整合啟動器 (launcher.py)
-提供一個統一的中文界面來管理所有功能：
-- 🚀 生成新的漫畫腳本與語音
-- 🌐 啟動網頁界面查看結果  
-- 📂 開啟結果資料夾
-- 📊 快速預覽最新結果
-- 🧹 清理舊檔案
+### 文件結構
 
-**使用方法：**
-```bash
-launcher.bat          # Windows 批次檔
-launcher.ps1          # PowerShell 腳本（更好的中文支援）
-python launcher.py    # Python 腳本（跨平台）
+```
+regular-comix/
+├── launcher.py          # 主啟動器
+├── launcher.bat         # Windows 批次啟動器
+├── launcher.ps1         # PowerShell 啟動器
+├── main.py             # 核心邏輯
+├── requirements.txt    # Python 依賴
+├── .env.example       # 環境變數範例
+├── web/               # 網頁界面
+│   ├── app.py         # Flask 應用
+│   ├── templates/     # HTML 模板
+│   └── static/        # CSS/JS 資源
+├── docs/              # 靜態網站
+│   ├── index.html     # 主頁面
+│   └── outputs/       # 生成的內容
+└── .github/workflows/ # GitHub Actions
 ```
 
-### 中文顯示優化
-- ✅ PowerShell 腳本完全支援中文
-- ✅ 網頁界面使用 Noto Sans TC 字體
-- ✅ 終端機自動設定 UTF-8 編碼
-- ✅ 所有輸出內容正確顯示中文
+## 📝 更新記錄
 
-### Web 界面改進
-- 📱 響應式設計，支援行動裝置
-- 🎨 美觀的漸層背景與卡片設計
-- 🔊 內建音訊播放器
-- 📅 時間批次選擇器
-- 📄 直接下載腳本與音檔
+### v1.0.0 穩定版 (2025-07-01)
 
-## �📄 授權
+#### ✨ 新功能
+- **完整的啟動器系統** - 提供三種啟動方式 (bat/ps1/py)
+- **實時進度顯示** - 詳細的執行狀態和進度提示
+- **智能錯誤處理** - 網絡重試和異常恢復機制
+- **交互式選單** - 友好的中文操作界面
+
+#### 🔧 改進
+- **中文編碼優化** - 解決 Windows 終端中文顯示問題
+- **輸入處理優化** - 修復交互式輸入無響應問題
+- **文件管理** - 自動創建時間戳文件夾
+- **API 調用優化** - 增加重試機制和錯誤提示
+
+#### 🧹 維護
+- **代碼清理** - 移除調試和測試文件
+- **文檔更新** - 完善 README 和使用指南
+- **版本標記** - 建立穩定版本標籤
+
+#### 🎯 使用體驗
+- **一鍵啟動** - 雙擊 `launcher.bat` 即可開始
+- **實時反饋** - 每個步驟都有清楚的進度提示
+- **多種選項** - 生成內容、查看結果、清理文件等
+
+## 🤝 貢獻指南
+
+歡迎提交 Pull Request 或建立 Issue！
+
+1. Fork 此項目
+2. 創建功能分支: `git checkout -b feature/amazing-feature`
+3. 提交更改: `git commit -m 'Add amazing feature'`
+4. 推送分支: `git push origin feature/amazing-feature`
+5. 開啟 Pull Request
+
+## 📄 授權
 
 MIT License - 詳見 [LICENSE](LICENSE) 檔案

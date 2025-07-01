@@ -28,8 +28,8 @@
 
 項目包含了完整的 GitHub Actions 工作流程 (`.github/workflows/deploy.yml`)，它會：
 
-- ⏰ 每小時自動執行一次
-- 🎭 生成新的漫畫腳本和語音檔案
+- ⏰ 每3小時自動執行一次
+- 🎭 生成10個新的漫畫腳本和語音檔案
 - 📝 自動提交變更到 repository
 - 🚀 自動部署到 GitHub Pages
 
@@ -64,8 +64,11 @@ regular-comix/
 
 ```yaml
 schedule:
-  # 每小時執行 (目前設定)
-  - cron: '0 * * * *'
+  # 每3小時執行 (目前設定)
+  - cron: '0 */3 * * *'
+  
+  # 每小時執行
+  # - cron: '0 * * * *'
   
   # 每天執行兩次 (早上 8 點和晚上 8 點 UTC)
   # - cron: '0 8,20 * * *'

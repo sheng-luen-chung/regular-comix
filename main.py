@@ -27,7 +27,7 @@ genai.configure(api_key=GOOGLE_API_KEY)
 OUTPUT_DIR = 'docs/outputs'
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-def get_top_news(num_topics=10, max_retries=3):
+def get_top_news(num_topics=5, max_retries=3):  # 預設改為5個主題
     url = 'https://news.google.com/rss?hl=zh-TW&gl=TW&ceid=TW:zh-TW'
     
     for attempt in range(max_retries):
@@ -212,7 +212,7 @@ def main():
         print(f"{'='*50}")
         
         print(f"📰 正在從 Google News 獲取新聞...")
-        topics = get_top_news(num_topics=10)
+        topics = get_top_news(num_topics=5)  # 減少到5個主題以節省 API 配額
         if not topics:
             print("❌ 未找到新聞主題，程序結束")
             return

@@ -325,8 +325,12 @@ function updateBatchSelector() {
     // 清空選項
     batchSelect.innerHTML = '<option value="">-- 選擇批次 --</option>';
     
-    // 添加批次選項
-    allBatches.forEach(batch => {
+    // 只添加有內容的批次選項
+    const batchesWithContent = allBatches.filter(batch => {
+        return allScripts[batch] && allScripts[batch].length > 0;
+    });
+    
+    batchesWithContent.forEach(batch => {
         const option = document.createElement('option');
         option.value = batch;
         option.textContent = formatBatchDate(batch);
@@ -341,11 +345,13 @@ function updateBatchSelector() {
         }
     });
     
-    // 預設選擇最新批次
-    if (allBatches.length > 0) {
-        batchSelect.value = allBatches[0];
-        const scriptCount = allScripts[allBatches[0]] ? allScripts[allBatches[0]].length : 0;
+    // 預設選擇最新的有內容批次
+    if (batchesWithContent.length > 0) {
+        batchSelect.value = batchesWithContent[0];
+        const scriptCount = allScripts[batchesWithContent[0]] ? allScripts[batchesWithContent[0]].length : 0;
         batchInfo.textContent = `總共 ${scriptCount} 個漫畫腳本`;
+    } else {
+        batchInfo.textContent = '目前沒有可用的漫畫腳本';
     }
 }
 

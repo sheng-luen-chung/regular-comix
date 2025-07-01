@@ -133,8 +133,10 @@ def save_script_and_voice(topic, script, timestamp):
     os.makedirs(batch_dir, exist_ok=True)
     print(f"📁 建立目錄：{batch_dir}")
     
-    # 移除 Windows 不允許的檔名字元
-    safe_topic = re.sub(r'[\\/:*?"<>|\s]', '_', topic)[:20]
+    # 移除 Windows 不允許的檔名字元，但保留更多中文字符
+    safe_topic = re.sub(r'[\\/:*?"<>|]', '_', topic)
+    # 限制檔名長度，避免路徑過長
+    safe_topic = safe_topic[:50]  # 增加長度限制
     base = os.path.join(batch_dir, safe_topic)
     script_path = f"{base}.txt"
     voice_path = f"{base}.mp3"
@@ -146,10 +148,15 @@ def save_script_and_voice(topic, script, timestamp):
     print(f"✅ 腳本已保存：{script_path}")
     
     # 生成語音
-    print(f"🔊 正在生成中文語音（可能需要幾秒鐘）...")
-    tts = gTTS(script, lang='zh-tw')
-    tts.save(voice_path)
-    print(f"✅ 語音已保存：{voice_path}")
+    try:
+        print(f"🔊 正在生成中文語音（可能需要幾秒鐘）...")
+        tts = gTTS(script, lang='zh-tw')
+        tts.save(voice_path)
+        print(f"✅ 語音已保存：{voice_path}")
+    except Exception as e:
+        print(f"⚠️ 語音生成失敗: {str(e)}")
+        print(f"📝 僅保存了腳本文件")
+        return script_path, None
     
     return script_path, voice_path
 

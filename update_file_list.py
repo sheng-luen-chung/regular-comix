@@ -107,6 +107,11 @@ def sync_to_github():
 
 def main():
     """主函數：更新文件列表並同步到 GitHub"""
+    import sys
+    
+    # 檢查是否為自動模式（GitHub Actions）
+    auto_mode = '--auto-yes' in sys.argv
+    
     print(f"🚀 Regular Comix 內容同步工具")
     print(f"{'='*50}")
     
@@ -115,7 +120,12 @@ def main():
         print(f"❌ 文件列表更新失敗")
         sys.exit(1)
     
-    # 2. 詢問是否要同步到 GitHub
+    # 2. 如果是自動模式，直接返回成功（不同步）
+    if auto_mode:
+        print(f"✅ 自動模式：文件列表已更新")
+        return
+    
+    # 3. 交互模式：詢問是否要同步到 GitHub
     try:
         sync_choice = input(f"\n🤔 是否要將更改同步到 GitHub Pages？(y/N): ").lower().strip()
         

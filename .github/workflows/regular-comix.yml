@@ -45,19 +45,26 @@ jobs:
       run: |
         python main.py
     
+    - name: Update file list
+      run: |
+        python update_file_list.py --auto-yes
+    
     - name: Check for changes
       id: verify-changed-files
       run: |
         if [ -n "$(git status --porcelain)" ]; then
           echo "changed=true" >> $GITHUB_OUTPUT
+          echo "📝 發現以下變更檔案:"
+          git status --porcelain
         else
           echo "changed=false" >> $GITHUB_OUTPUT
+          echo "ℹ️ 沒有檔案變更"
         fi
     
     - name: Commit and push changes
       if: steps.verify-changed-files.outputs.changed == 'true'
       run: |
-        git add docs/outputs/
+        git add docs/outputs/ docs/file-list.json
         git commit -m "🤖 Auto-generated comics - $(date '+%Y-%m-%d %H:%M:%S UTC')"
         git push origin HEAD:${{ github.ref_name }}
     

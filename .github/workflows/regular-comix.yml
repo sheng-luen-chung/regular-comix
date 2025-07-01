@@ -2,8 +2,8 @@ name: Regular Comic Generator
 
 on:
   schedule:
-    # 每小時執行一次 (UTC 時間)
-    - cron: '0 * * * *'
+    # 每2小時執行一次 (UTC 時間) - 避免過於頻繁
+    - cron: '0 */2 * * *'
   workflow_dispatch:  # 允許手動觸發
 
 # 給予 GitHub Actions 必要的權限
